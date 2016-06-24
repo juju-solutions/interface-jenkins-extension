@@ -14,9 +14,9 @@ from charms.reactive import RelationBase
 from charms.reactive import hook
 from charms.reactive import scopes
 
-from jenkinslib.credentials import Credentials
-from jenkinslib.plugins import Plugins
-from jenkinslib.nodes import Nodes
+from charms.layer.jenkins.credentials import Credentials
+from charms.layer.jenkins.plugins import Plugins
+from charms.layer.jenkins.nodes import Nodes
 
 
 class JenkinsMaster(RelationBase):
