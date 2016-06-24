@@ -5,6 +5,6 @@ from charms.reactive import scopes
 
 
 class JenkinsExtension(RelationBase):
-    scope = scopes.CONTAINER
+    scope = scopes.GLOBAL
 
     # TODO: actually implement the consumer side.

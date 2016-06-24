@@ -16,10 +16,11 @@ from charms.reactive import scopes
 
 from jenkinslib.credentials import Credentials
 from jenkinslib.plugins import Plugins
+from jenkinslib.nodes import Nodes
 
 
 class JenkinsMaster(RelationBase):
-    scope = scopes.CONTAINER
+    scope = scopes.GLOBAL
 
     @hook("{provides:jenkins-extension}-relation-{joined}")
     def joined(self):
@@ -52,12 +53,12 @@ class JenkinsMaster(RelationBase):
     @hook("{provides:jenkins-extension}-relation-{changed}")
     def changed(self):
         """Install optional plugins."""
-        required_plugins = relation_get("required_plugins")
-        if not required_plugins:
-            return
         # extension subordinates may request the principle service install
         # specified jenkins plugins
         log("Installing required plugins as requested by jenkins-extension "
             "subordinate.")
-        plugins = Plugins
-        plugins.install(required_plugins)
+        plugins = Plugins()
+        plugins.install(relation_get("required_plugins"))
+
+        nodes = Nodes()
+        nodes.wait()  # Wait for the service to be fully up
