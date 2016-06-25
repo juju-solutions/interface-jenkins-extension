@@ -41,8 +41,8 @@ class JenkinsMaster(RelationBase):
                 "admin_username": credentials.username(),
                 "admin_password": credentials.password(),
                 "jenkins_url": "http://%s:8080" % unit_get("private-address"),
-                "jenkins-admin-user": config("jenkins-admin-user"),
-                "jenkins-token": config("jenkins-token")
+                "jenkins-admin-user": credentials.username(),
+                "jenkins-token": credentials.token(),
             }
             relation_set(relation_id=rid, relation_settings=relation_settings)
             if zuul_address:
