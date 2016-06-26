@@ -6,7 +6,6 @@ from charmhelpers.core.hookenv import (
     related_units,
     relation_get,
     relation_set,
-    config,
     unit_get,
 )
 
@@ -16,7 +15,7 @@ from charms.reactive import scopes
 
 from charms.layer.jenkins.credentials import Credentials
 from charms.layer.jenkins.plugins import Plugins
-from charms.layer.jenkins.nodes import Nodes
+from charms.layer.jenkins.api import Api
 
 
 class JenkinsMaster(RelationBase):
@@ -60,5 +59,5 @@ class JenkinsMaster(RelationBase):
         plugins = Plugins()
         plugins.install(relation_get("required_plugins"))
 
-        nodes = Nodes()
-        nodes.wait()  # Wait for the service to be fully up
+        api = Api()
+        api.wait()  # Wait for the service to be fully up
