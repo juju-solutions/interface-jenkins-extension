@@ -13,10 +13,12 @@ from charms.reactive import RelationBase
 from charms.reactive import hook
 from charms.reactive import scopes
 
-from charms.layer.jenkins.credentials import Credentials
-from charms.layer.jenkins.plugins import Plugins
-from charms.layer.jenkins.api import Api
-
+try:
+    from charms.layer.jenkins.credentials import Credentials
+    from charms.layer.jenkins.plugins import Plugins
+    from charms.layer.jenkins.api import Api
+except ImportError:
+    log("Import of jenkins layer functionality failed. This is expected for Jenkins clients.")
 
 class JenkinsMaster(RelationBase):
     scope = scopes.GLOBAL
