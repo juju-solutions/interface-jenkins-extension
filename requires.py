@@ -17,6 +17,11 @@ class JenkinsExtension(RelationBase):
         conv = self.conversation()
         if conv.get_remote('jenkins_url'):
             conv.set_state('{relation_name}.available')
+            conv.set_state('{relation_name}.has.changed')
+
+    def change_acked(self):
+        conv = self.conversation()
+        conv.remove_state('{relation_name}.has.changed')
 
     def get_connection_info(self):
         '''
