@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 from charmhelpers.core.hookenv import (
     log,
     relation_ids,
@@ -18,7 +17,9 @@ try:
     from charms.layer.jenkins.plugins import Plugins
     from charms.layer.jenkins.api import Api
 except ImportError:
-    log("Import of jenkins layer functionality failed. This is expected for Jenkins clients.")
+    log("Import of jenkins layer functionality failed."
+        "This is expected for Jenkins clients.")
+
 
 class JenkinsMaster(RelationBase):
     scope = scopes.GLOBAL
