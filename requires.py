@@ -19,6 +19,13 @@ class JenkinsExtension(RelationBase):
             conv.set_state('{relation_name}.available')
             conv.set_state('{relation_name}.has.changed')
 
+    @hook("{requires:jenkins-extension}-relation-departed")
+    def departed(self):
+        """Indicate the relation is disconnected."""
+        log("Updating extension interface with up-to-date data.")
+        self.remove_state("{relation_name}.connected")
+        self.remove_state("{relation_name}.available")
+
     def change_acked(self):
         conv = self.conversation()
         conv.remove_state('{relation_name}.has.changed')
